@@ -1,0 +1,965 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Msagl.WpfGraphControl</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.ClickCounter">
+            <summary>
+            Mouse click counter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.ClickCounter.#ctor(System.Func{System.Windows.Point})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Msagl.WpfGraphControl.ClickCounter"/> class.
+            </summary>
+            <param name="mousePosition">Position of mouse pointer.</param>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.ClickCounter.Elapsed">
+            <summary>
+            Time elapsed event.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.ClickCounter.ClickedObject">
+            <summary>
+            Gets or sets clicked object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.ClickCounter.IsRunning">
+            <summary>
+            Gets a value indicating whether count is running.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.ClickCounter.DownCount">
+            <summary>
+            Gets mouse down count.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.ClickCounter.UpCount">
+            <summary>
+            Gets mouse up count.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.ClickCounter.AddMouseDown(System.Object)">
+            <summary>
+            Add mouse down event.
+            </summary>
+            <param name="objectUnderMouseCursor">Object currently under the mouse cursor.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.ClickCounter.AddMouseUp">
+            <summary>
+            Add mouse up event.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.Common">
+            <summary>
+            Common utilities.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.Common.BrushFromMsaglColor(Microsoft.Msagl.Drawing.Color)">
+            <summary>
+            Convert Msagl color to WPF brush.
+            </summary>
+            <param name="color">Msagl color.</param>
+            <returns>WPF brush.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.Common.BrushFromMsaglColor(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Convert Msagl color components to WPF brush.
+            </summary>
+            <param name="colorA">Alpha component.</param>
+            <param name="colorR">Red component.</param>
+            <param name="colorG">Green component.</param>
+            <param name="colorB">Blue component.</param>
+            <returns>WPF brush.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.Common.WpfPoint(Microsoft.Msagl.Core.Geometry.Point)">
+            <summary>
+            Convert Msagl point to WPF point.
+            </summary>
+            <param name="p">Msagl point.</param>
+            <returns>WPF point.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.Common.MsaglPoint(System.Windows.Point)">
+            <summary>
+            Convert WPF point to Msagl point.
+            </summary>
+            <param name="p">WPF point.</param>
+            <returns>Msagl point.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.Common.PositionFrameworkElement(System.Windows.FrameworkElement,Microsoft.Msagl.Core.Geometry.Point,System.Double)">
+            <summary>
+            Position element to center point.
+            </summary>
+            <param name="frameworkElement">Element to position.</param>
+            <param name="center">Center point.</param>
+            <param name="scale">Zoom level.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.Common.PositionFrameworkElement(System.Windows.FrameworkElement,System.Double,System.Double,System.Double)">
+            <summary>
+            Position element to center point.
+            </summary>
+            <param name="frameworkElement">Element to position.</param>
+            <param name="x">Center x.</param>
+            <param name="y">Center y.</param>
+            <param name="scale">Zoom level.</param>
+        </member>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.GraphViewer">
+            <summary>
+            Graph viewer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Msagl.WpfGraphControl.GraphViewer"/> class.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.LayoutStarted">
+            <summary>
+            Layout started event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.LayoutComplete">
+            <summary>
+            Layout completed event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.GraphChanged">
+            <summary>
+            Graph changed event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.ViewChangeEvent">
+            <summary>
+            View changed event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.MouseDown">
+            <summary>
+            Mouse down event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.MouseMove">
+            <summary>
+            Mouse move event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.MouseUp">
+            <summary>
+            Mouse up event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.MouseWheel">
+            <summary>
+            Mouse wheel event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.GraphViewer.ObjectUnderMouseCursorChanged">
+            <summary>
+            Object (node/edge/label) under mouse cursor changed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.DpiXStatic">
+            <summary>
+            Gets X DPI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.DpiYStatic">
+            <summary>
+            Gets Y DPI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.RunLayoutAsync">
+            <summary>
+            Gets or sets a value indicating whether to layout in a task.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.ModifierKeys">
+            <summary>
+            Gets modifier keys being held.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.Entities">
+            <summary>
+            Gets graph entities.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.GraphCanvas">
+            <summary>
+            Gets the canvas to draw the graph.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.LayoutEditor">
+            <summary>
+            Gets layout editor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.ZoomFactor">
+            <summary>
+            Gets zoom factor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.CurrentScale">
+            <summary>
+            Gets current scale.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.DpiX">
+            <summary>
+            Gets X DPI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.DpiY">
+            <summary>
+            Gets Y DPI.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.Transform">
+            <summary>
+            Gets or sets plane transformation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.NeedToCalculateLayout">
+            <summary>
+            Gets or sets a value indicating whether layout needs to be calculated.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.CancelToken">
+            <summary>
+            Gets or sets the cancel token used to cancel a long running layout.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.NeedToRemoveOverlapOnly">
+            <summary>
+            Gets or sets a value indicating whether layout is done, but the overlap is removed for graphs with geometry.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.ObjectUnderMouseCursor">
+            <summary>
+            Gets current object under the mouse cursor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.LineThicknessForEditing">
+            <summary>
+            Gets or sets line thickness for editing.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.LayoutEditingEnabled">
+            <summary>
+            Gets or sets a value indicating whether the layout editing with the mouse is enabled if and only if this field is set to false.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.InsertingEdge">
+            <summary>
+            Gets or sets a value indicating whether inserting edge.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.UnderlyingPolylineCircleRadius">
+            <summary>
+            Gets underlying polyline circle radius.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.ViewerGraph">
+            <summary>
+            Gets or sets viewer graph.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.ArrowheadLength">
+            <summary>
+            Gets arrowhead length.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.Graph">
+            <summary>
+            Gets or sets graph being viewed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.ClientViewportMappedToGraph">
+            <summary>
+            Gets client viewport mapped to graph.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.CurrentXOffset">
+            <summary>
+            Gets current X offset.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.CurrentYOffset">
+            <summary>
+            Gets current Y offset.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.TargetPortCircle">
+            <summary>
+            Gets or sets target port circle.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GraphViewer.MouseHitTolerance">
+            <summary>
+            Gets mouse hit tolerance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.CreateMenuItem(System.String,Microsoft.Msagl.Drawing.VoidDelegate)">
+            <summary>
+            Create menu item.
+            </summary>
+            <param name="title">Menu title.</param>
+            <param name="voidVoidDelegate">Menu delegate.</param>
+            <returns>Menu item.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.MeasureText(System.String,System.Windows.Media.FontFamily,System.Double,System.Windows.Media.Visual)">
+            <summary>
+            Measure string of text.
+            </summary>
+            <param name="text">Text to measure.</param>
+            <param name="family">Font family.</param>
+            <param name="size">Font size.</param>
+            <param name="visual">Visual element used to determine pixels per density-independent-pixel.</param>
+            <returns>Text size.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.UpdateGraphInPlace(Microsoft.Msagl.Drawing.Graph)">
+            <summary>
+            Update graph being viewed in place (assuming structure hasn't changed, otherwise triggers full re-layout).
+            </summary>
+            <remarks>
+            This updates only the labels and color attributes, unless a structural change is detected.
+            </remarks>
+            <param name="graph">Graph being viewed.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.OnDragEnd(System.Collections.Generic.IEnumerable{Microsoft.Msagl.Drawing.IViewerObject})">
+            <summary>
+            On drag end.
+            </summary>
+            <param name="changedObjects">Changed object.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.PopupMenus(System.Tuple{System.String,Microsoft.Msagl.Drawing.VoidDelegate}[])">
+            <summary>
+            Set popup menus.
+            </summary>
+            <param name="menuItems">Menu items.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.CreateIViewerNode(Microsoft.Msagl.Drawing.Node)">
+            <summary>
+            Create viewer node.
+            </summary>
+            <param name="drawingNode">Drawing node.</param>
+            <returns>Viewer node.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.CreateAndRegisterFrameworkElementOfDrawingNode(Microsoft.Msagl.Drawing.Node)">
+            <summary>
+            Create and register framework element of drawing node.
+            </summary>
+            <param name="node">Drawing node.</param>
+            <returns>Framework element.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.SetInitialTransform">
+            <summary>
+            zooms to the default view.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.DrawImage(System.String)">
+            <summary>
+            Draw image.
+            </summary>
+            <param name="fileName">Image file name.</param>
+            <returns>Image.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.RegisterLabelCreator(Microsoft.Msagl.Drawing.DrawingObject,System.Func{Microsoft.Msagl.Drawing.DrawingObject,System.Windows.FrameworkElement})">
+            <summary>
+            Register label creator.
+            </summary>
+            <param name="drawingObject">Drawing object.</param>
+            <param name="func">Function from drawing object to framework element.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.UnregisterLabelCreator(Microsoft.Msagl.Drawing.DrawingObject)">
+            <summary>
+            Unregister label creator.
+            </summary>
+            <param name="drawingObject">Drawing object.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.GetLabelCreator(Microsoft.Msagl.Drawing.DrawingObject)">
+            <summary>
+            Get label creator function.
+            </summary>
+            <param name="drawingObject">Drawing object.</param>
+            <returns>Label creator function.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.DrawRubberLine(Microsoft.Msagl.Drawing.MsaglMouseEventArgs)">
+            <summary>
+            Draw rubber line.
+            </summary>
+            <param name="args">Mouse event args.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.StopDrawingRubberLine">
+            <summary>
+            Stop drawing rubber line.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.AddEdge(Microsoft.Msagl.Drawing.IViewerEdge,System.Boolean)">
+            <summary>
+            Add edge.
+            </summary>
+            <param name="edge">Edge to be added.</param>
+            <param name="registerForUndo">Whether to register for undo.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.CreateEdgeWithGivenGeometry(Microsoft.Msagl.Drawing.Edge)">
+            <summary>
+            Create edge with given geometry.
+            </summary>
+            <param name="drawingEdge">Edge geometry.</param>
+            <returns>Edge.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.AddNode(Microsoft.Msagl.Drawing.IViewerNode,System.Boolean)">
+            <summary>
+            Add a node.
+            </summary>
+            <param name="node">Node to add.</param>
+            <param name="registerForUndo">Whether to register for undo.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.AddNode(Microsoft.Msagl.Drawing.Node)">
+            <summary>
+            Add node.
+            </summary>
+            <param name="drawingNode">Drawing node to add.</param>
+            <returns>Viewer object.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.RemoveEdge(Microsoft.Msagl.Drawing.IViewerEdge,System.Boolean)">
+            <summary>
+            Remove edge.
+            </summary>
+            <param name="edge">Edge to remove.</param>
+            <param name="registerForUndo">Whether to register for undo.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.RemoveNode(Microsoft.Msagl.Drawing.IViewerNode,System.Boolean)">
+            <summary>
+            Remove node.
+            </summary>
+            <param name="node">Node to remove.</param>
+            <param name="registerForUndo">Whether to register for undo.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.RouteEdge(Microsoft.Msagl.Drawing.Edge)">
+            <summary>
+            Route edge.
+            </summary>
+            <param name="drawingEdge">Drawing edge to route.</param>
+            <returns>Viewer edge.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.SetSourcePortForEdgeRouting(Microsoft.Msagl.Core.Geometry.Point)">
+            <summary>
+            Set source port for edge routing.
+            </summary>
+            <param name="portLocation">Port location.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.SetTargetPortForEdgeRouting(Microsoft.Msagl.Core.Geometry.Point)">
+            <summary>
+            Set target port for edge routing.
+            </summary>
+            <param name="portLocation">Point of port location.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.RemoveSourcePortEdgeRouting">
+            <summary>
+            Remove source port edge routing.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.RemoveTargetPortEdgeRouting">
+            <summary>
+            Remove target port edge routing.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.DrawRubberEdge(Microsoft.Msagl.Core.Layout.EdgeGeometry)">
+            <summary>
+            Draw rubber edge.
+            </summary>
+            <param name="edgeGeometry">Edge geometry.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.StopDrawingRubberEdge">
+            <summary>
+            Stop drawing rubber edge.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.DrawRubberLine(Microsoft.Msagl.Core.Geometry.Point)">
+            <summary>
+            Draw rubber line.
+            </summary>
+            <param name="rubberEnd">Rubber end point.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.CreateIViewerNode(Microsoft.Msagl.Drawing.Node,Microsoft.Msagl.Core.Geometry.Point,System.Object)">
+            <summary>
+            Create viewer node.
+            </summary>
+            <param name="drawingNode">Drawing node.</param>
+            <param name="center">Center point.</param>
+            <param name="visualElement">Visual element.</param>
+            <returns>Viewer node.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.ZoomAbout(System.Double,System.Windows.Point)">
+            <summary>
+            Keeps centerOfZoom pinned to the screen and changes the scale by zoomFactor.
+            </summary>
+            <param name="zoomFactor">Zoom factor.</param>
+            <param name="centerOfZoom">Center point of zoom.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.PointToCenter(Microsoft.Msagl.Core.Geometry.Point)">
+            <summary>
+            Moves the point to the center of the viewport.
+            </summary>
+            <param name="sourcePoint">Source point.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.NodeToCenterWithScale(Microsoft.Msagl.Drawing.Node,System.Double)">
+            <summary>
+            Pan node to center with scale.
+            </summary>
+            <param name="node">Node to center.</param>
+            <param name="scale">Scale factor.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.NodeToCenter(Microsoft.Msagl.Drawing.Node)">
+            <summary>
+            Pan node to center.
+            </summary>
+            <param name="node">Node to center.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.Invalidate(Microsoft.Msagl.Drawing.IViewerObject)">
+            <summary>
+            Invalidate child object.
+            </summary>
+            <param name="objectToInvalidate">Child object to invalidate.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.Invalidate">
+            <summary>
+            Invalidate graph viewer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.ScreenToSource(Microsoft.Msagl.Drawing.MsaglMouseEventArgs)">
+            <summary>
+            Screen point (under mouse) to source point.
+            </summary>
+            <param name="e">Mouse event args.</param>
+            <returns>Source point.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.BindToPanel(System.Windows.Controls.Panel)">
+            <summary>
+            adds the main panel of the viewer to the children of the parent.
+            </summary>
+            <param name="panel">Panel to which to bind.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.StartDrawingRubberLine(Microsoft.Msagl.Core.Geometry.Point)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.ClearGraphViewer">
+            <summary>
+            Clear graph viewer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.CreateMouseEventArgs(System.Windows.Input.MouseEventArgs)">
+            <summary>
+            Create MSAGL mouse event args.
+            </summary>
+            <param name="e">Mouse event args.</param>
+            <returns>MSAGL mouse event args.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.CreateTextBlock(Microsoft.Msagl.Drawing.Label)">
+            <summary>
+            Create text block.
+            </summary>
+            <param name="drawingLabel">Drawing label.</param>
+            <returns>Text block.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GraphViewer.SetTransformFromTwoPoints(System.Windows.Point,Microsoft.Msagl.Core.Geometry.Point)">
+            <summary>
+            this function pins the sourcePoint to screenPoint.
+            </summary>
+            <param name="screenPoint">Screen point.</param>
+            <param name="sourcePoint">Source point.</param>
+        </member>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs">
+            <summary>
+            Graph view mouse event args.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs.#ctor(System.Windows.Input.MouseEventArgs,Microsoft.Msagl.WpfGraphControl.GraphViewer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs"/> class.
+            </summary>
+            <param name="argsPar">Mouse event args.</param>
+            <param name="graphScrollerP">Graph viewer.</param>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs.LeftButtonIsPressed">
+            <summary>
+            Gets a value indicating whether left mouse button is pressed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs.MiddleButtonIsPressed">
+            <summary>
+            Gets a value indicating whether middle mouse button is pressed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs.RightButtonIsPressed">
+            <summary>
+            Gets a value indicating whether right mouse button is pressed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs.Handled">
+            <summary>
+            Gets or sets a value indicating whether the event is handled.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs.X">
+            <summary>
+            Gets mouse X position.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs.Y">
+            <summary>
+            Gets mouse Y position.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.GvMouseEventArgs.Clicks">
+            <summary>
+            Gets number of clicks.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.IInvalidatable">
+            <summary>
+            Invalidatable data.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.IInvalidatable.Invalidate">
+            <summary>
+            Invalidate data.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.NativeMethods">
+            <summary>
+            Native methods.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.NativeMethods.GetDeviceCaps(System.Int32,System.Int32)">
+            <summary>
+            Get device capabilities.
+            </summary>
+            <param name="hdc">Handle to device context.</param>
+            <param name="nIndex">Item index.</param>
+            <returns>Device-specific value.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.NativeMethods.GetDesktopWindow">
+            <summary>
+            Get handle to desktop window.
+            </summary>
+            <returns>Handle to desktop window.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.NativeMethods.GetWindowDC(System.Int32)">
+            <summary>
+            Get window device context.
+            </summary>
+            <param name="hWnd">Window handle.</param>
+            <returns>Device context.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.NativeMethods.ReleaseDC(System.Int32,System.Int32)">
+            <summary>
+            Release device context.
+            </summary>
+            <param name="hWnd">Window handle.</param>
+            <param name="hDc">Device context handle.</param>
+            <returns>Indication of whether released.</returns>
+        </member>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.VEdge">
+            <summary>
+            Visual edge.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.#ctor(Microsoft.Msagl.Drawing.Edge,System.Windows.FrameworkElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Msagl.WpfGraphControl.VEdge"/> class.
+            </summary>
+            <param name="edge">Underlying edge.</param>
+            <param name="labelFrameworkElement">Underlying label framework element.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.#ctor(Microsoft.Msagl.Drawing.Edge,Microsoft.Msagl.Layout.LargeGraphLayout.LgLayoutSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Msagl.WpfGraphControl.VEdge"/> class.
+            </summary>
+            <param name="edge">Underlying edge.</param>
+            <param name="layoutSettings">Layout settings.</param>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.VEdge.MarkedForDraggingEvent">
+            <inheritdoc/>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.VEdge.UnmarkedForDraggingEvent">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.MarkedForDragging">
+            <summary>
+            Gets or sets a value indicating whether marked for dragging.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.Edge">
+            <summary>
+            Gets underlying edge.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.Source">
+            <summary>
+            Gets source node.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.Target">
+            <summary>
+            Gets target node.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.RadiusOfPolylineCorner">
+            <summary>
+            Gets or sets the radius of the polyline corner.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.DrawingObject">
+            <summary>
+            Gets underlying drawing object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.VLabel">
+            <summary>
+            Gets or sets corresponding visual label.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.PathStrokeThicknessFunc">
+            <summary>
+            Gets or sets function returning path stroke thickness.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.FrameworkElements">
+            <summary>
+            Gets underlying framework element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.CurvePath">
+            <summary>
+            Gets or sets curve path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.SourceArrowHeadPath">
+            <summary>
+            Gets or sets source arrow head path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.TargetArrowHeadPath">
+            <summary>
+            Gets or sets target arrow head path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VEdge.EdgeAttrClone">
+            <summary>
+            Gets or sets edge attibutes (clone).
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.Invalidate">
+            <summary>
+            Invalidate rendered edge.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.CreateFrameworkElementForRail(Microsoft.Msagl.Layout.LargeGraphLayout.Rail,System.Byte)">
+            <summary>
+            Create framework element for rail.
+            </summary>
+            <param name="rail">Rail for which to create element.</param>
+            <param name="edgeTransparency">Edge transparency.</param>
+            <returns>Framework element.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.DefiningTargetArrowHead(Microsoft.Msagl.Core.Layout.EdgeGeometry,System.Double)">
+            <summary>
+            Generate geometry of defining target arrow head.
+            </summary>
+            <param name="edgeGeometry">Edge geometry.</param>
+            <param name="thickness">Edge thickness.</param>
+            <returns>Geometry.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.FillContextForICurve(System.Windows.Media.StreamGeometryContext,Microsoft.Msagl.Core.Geometry.Curves.ICurve)">
+            <summary>
+            Fill context for curve.
+            </summary>
+            <param name="context">Stream geometry context.</param>
+            <param name="curve">Curve.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.GetICurveWpfGeometry(Microsoft.Msagl.Core.Geometry.Curves.ICurve)">
+            <summary>
+            Get WPF curve geometry.
+            </summary>
+            <param name="curve">Curve for which to get geometry.</param>
+            <returns>Curve geometry.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.Invalidate(System.Windows.FrameworkElement,Microsoft.Msagl.Layout.LargeGraphLayout.Rail,System.Byte)">
+            <summary>
+            Invalidate rendered edge.
+            </summary>
+            <param name="fe">Framework element.</param>
+            <param name="rail">Rail.</param>
+            <param name="edgeTransparency">Edge transparency.</param>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.DashSize">
+            <summary>
+            Get dash size.
+            </summary>
+            <returns>Dash size.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VEdge.RemoveItselfFromCanvas(System.Windows.Controls.Canvas)">
+            <summary>
+            Remove this edge from canvas.
+            </summary>
+            <param name="graphCanvas">Canvas from which to remove.</param>
+        </member>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.VLabel">
+            <summary>
+            Visual label.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VLabel.#ctor(Microsoft.Msagl.Drawing.Edge,System.Windows.FrameworkElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Msagl.WpfGraphControl.VLabel"/> class.
+            </summary>
+            <param name="edge">Edge being labeled.</param>
+            <param name="frameworkElement">Underlying framework element.</param>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.VLabel.MarkedForDraggingEvent">
+            <inheritdoc/>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.VLabel.UnmarkedForDraggingEvent">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VLabel.FrameworkElement">
+            <summary>
+            Gets underlying framework element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VLabel.DrawingObject">
+            <summary>
+            Gets underlying drawing object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VLabel.MarkedForDragging">
+            <summary>
+            Gets or sets a value indicating whether marked for dragging.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VLabel.Invalidate">
+            <summary>
+            Invalidate rendered label.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Msagl.WpfGraphControl.VNode">
+            <summary>
+            Visual node.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VNode.#ctor(Microsoft.Msagl.Drawing.Node,System.Windows.FrameworkElement,System.Func{Microsoft.Msagl.Drawing.Edge,Microsoft.Msagl.WpfGraphControl.VEdge},System.Func{System.Double})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Msagl.WpfGraphControl.VNode"/> class.
+            </summary>
+            <param name="node">Underlying node.</param>
+            <param name="frameworkElementOfNodeForLabelOfLabel">Underlying framework element.</param>
+            <param name="funcFromDrawingEdgeToVEdge">Function from drawing to visual edge.</param>
+            <param name="pathStrokeThicknessFunc">Function to path stroke thickness.</param>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.VNode.IsCollapsedChanged">
+            <summary>
+            Collapsed changed event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.VNode.MarkedForDraggingEvent">
+            <summary>
+            Marked for dragging event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Msagl.WpfGraphControl.VNode.UnmarkedForDraggingEvent">
+            <summary>
+            Unmarked for dragging event.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.Node">
+            <summary>
+            Gets underlying node.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.DrawingObject">
+            <summary>
+            Gets underlying drawing object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.MarkedForDragging">
+            <summary>
+            Gets or sets a value indicating whether marked for dragging.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.InEdges">
+            <summary>
+            Gets input edges.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.OutEdges">
+            <summary>
+            Gets output edges.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.SelfEdges">
+            <summary>
+            Gets edges looping back to self.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.FrameworkElementOfNodeForLabel">
+            <summary>
+            Gets or sets underlying framework element.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.BoundaryPath">
+            <summary>
+            Gets or sets boundary path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.ZIndex">
+            <summary>
+            Gets z-index.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.FrameworkElements">
+            <summary>
+            Gets underlying framework elements.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Msagl.WpfGraphControl.VNode.PathStrokeThickness">
+            <summary>
+            Gets path stroke thickness.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VNode.GetLabelTextAndToolTip(System.String)">
+            <summary>
+            Get label text and optional tooltip from string in the form "label|tooltip".
+            </summary>
+            <param name="text">Text value from which to extract label and tooltip text.</param>
+            <returns>Label and tooltip text.</returns>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VNode.Invalidate">
+            <summary>
+            Invalidate rendered node.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VNode.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VNode.CreateNodeBoundaryPath">
+            <summary>
+            Create node boundary path.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Msagl.WpfGraphControl.VNode.DetatchFromCanvas(System.Windows.Controls.Canvas)">
+            <summary>
+            Detach node from canvas.
+            </summary>
+            <param name="graphCanvas">Graph canvas.</param>
+        </member>
+    </members>
+</doc>
